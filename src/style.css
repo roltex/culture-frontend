@@ -1,0 +1,19 @@
+@import "tailwindcss";
+.bg-primary {
+  background-color: #143057;
+}
+.border-primary {
+  border-color: #143057;
+}
+.text-primary {
+  color: #143057;
+}
+.hover:bg-primary:hover {
+  background-color: #143057;
+}
+.hover:bg-primary-dark:hover {
+  background-color: #0f2340;
+}
+.bg-primary-10 {
+  background-color: #14305710;
+}
