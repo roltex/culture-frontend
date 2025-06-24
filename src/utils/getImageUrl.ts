@@ -13,7 +13,8 @@ export function getImageUrl(path: string | null | undefined): string {
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
   const backendBaseUrl = apiBaseUrl.replace('/api/v1', '');
   
-  // Ensure the path starts with /storage/
+  // If the path already starts with /storage/, use it as is
+  // Otherwise, assume it's a relative path that needs /storage/ prefix
   const imagePath = path.startsWith('/storage/') ? path : `/storage/${path}`;
   
   // Combine backend URL with image path
