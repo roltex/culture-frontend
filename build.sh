@@ -2,9 +2,13 @@
 
 echo "=== Building Frontend for Vercel ==="
 
-# Install dependencies
+# Set environment variables to avoid Rollup native dependency issues
+export ROLLUP_SKIP_NATIVE=true
+export NODE_OPTIONS="--max-old-space-size=4096"
+
+# Install dependencies with specific flags to avoid native dependencies
 echo "1. Installing dependencies..."
-npm install
+npm install --no-optional --platform=linux --arch=x64
 
 # Clear any existing build
 echo "2. Clearing existing build..."

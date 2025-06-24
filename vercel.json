@@ -1,34 +1,8 @@
 {
-  "buildCommand": "bash build-vercel.sh",
+  "buildCommand": "bash build.sh",
   "outputDirectory": "dist",
   "framework": "vite",
   "installCommand": "echo 'Installation handled by build script'",
-  "devCommand": "npm run dev",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/api/(.*)",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, PUT, DELETE, OPTIONS"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization, Accept-Language"
-        }
-      ]
-    }
-  ],
   "functions": {
     "dist/**/*.html": {
       "runtime": "nodejs20.x"
