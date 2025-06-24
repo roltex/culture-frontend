@@ -1,14 +1,5 @@
 {
-  "buildCommand": "bash build.sh",
+  "buildCommand": "echo 'Already built locally'",
   "outputDirectory": "dist",
-  "framework": "vite",
-  "installCommand": "echo 'Installation handled by build script'",
-  "functions": {
-    "dist/**/*.html": {
-      "runtime": "nodejs20.x"
-    }
-  },
-  "env": {
-    "ROLLUP_SKIP_NATIVE": "true"
-  }
-} 
+  "installCommand": "echo 'No installation needed'"
+}
