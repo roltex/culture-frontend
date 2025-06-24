@@ -1,8 +1,8 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "bash build-vercel.sh",
   "outputDirectory": "dist",
   "framework": "vite",
-  "installCommand": "npm install",
+  "installCommand": "echo 'Installation handled by build script'",
   "devCommand": "npm run dev",
   "rewrites": [
     {
@@ -33,5 +33,8 @@
     "dist/**/*.html": {
       "runtime": "nodejs20.x"
     }
+  },
+  "env": {
+    "ROLLUP_SKIP_NATIVE": "true"
   }
 } 
