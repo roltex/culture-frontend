@@ -1,11 +1,11 @@
 <template>
   <div class="min-h-screen">
     <HeroNewsSlider />
-    <StatisticsSection />
+    <InstitutionsCarousel />
     <LatestNews />
     <ProjectsSection />
     <CompetitionsSection />
-    <InstitutionsCarousel />
+    <OtherStructuresCarousel />
   </div>
 </template>
 
@@ -15,7 +15,7 @@ import LatestNews from '@/components/home/LatestNews.vue'
 import ProjectsSection from '@/components/home/ProjectsSection.vue'
 import CompetitionsSection from '@/components/home/CompetitionsSection.vue'
 import InstitutionsCarousel from '@/components/home/InstitutionsCarousel.vue'
-import StatisticsSection from '@/components/home/StatisticsSection.vue'
+import OtherStructuresCarousel from '@/components/home/OtherStructuresCarousel.vue'
 
 </script>
 

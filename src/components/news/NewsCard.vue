@@ -2,9 +2,9 @@
   <article class="flex flex-col h-full">
     <!-- Image -->
     <div class="relative overflow-hidden mb-4">
-      <router-link :to="`/news/${news.slug}`" class="block">
+      <router-link :to="`/siakhleebi/${news.slug}`" class="block">
         <img
-          :src="news.featured_image || '/placeholder-news.jpg'"
+          :src="getImageUrl(news.featured_image) || '/placeholder-news.jpg'"
           :alt="localizedTitle"
           class="w-full h-48 object-cover transition-transform duration-300 ease-in-out hover:scale-105"
         />
@@ -25,7 +25,7 @@
         <!-- Text Content -->
         <div class="flex-grow">
           <h3 class="text-lg font-bold text-slate-800 mb-2 line-clamp-2 leading-tight">
-            <router-link :to="`/news/${news.slug}`" class="hover:text-primary-dark transition-colors">
+            <router-link :to="`/siakhleebi/${news.slug}`" class="hover:text-primary-dark transition-colors">
               {{ localizedTitle }}
             </router-link>
           </h3>
@@ -53,6 +53,7 @@ import { useI18n } from 'vue-i18n'
 import { computed } from 'vue'
 import type { News } from '@/composables/useNews'
 import { getLocalizedContent } from '@/composables/useNews'
+import { getImageUrl } from '@/utils/getImageUrl'
 
 interface Props {
   news: News
@@ -70,14 +71,26 @@ const formattedDay = computed(() => new Date(props.news.published_at).getDate().
 
 const formattedMonth = computed(() => {
   const date = new Date(props.news.published_at);
-  // Using a short month format, e.g., "APR"
-  return date.toLocaleString(locale.value, { month: 'short' }).toUpperCase();
+  const monthIndex = date.getMonth();
+  const monthNames = {
+    'ka': ['იან', 'თებ', 'მარ', 'აპრ', 'მაი', 'ივნ', 'ივლ', 'აგვ', 'სექ', 'ოქტ', 'ნოე', 'დეკ'],
+    'en': ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+  };
+  return monthNames[locale.value as keyof typeof monthNames]?.[monthIndex] || monthNames.en[monthIndex];
 });
 
 const formattedTime = computed(() => {
   const date = new Date(props.news.published_at);
-  // Using a simple time format, e.g., "5:00 PM"
-  return date.toLocaleTimeString(locale.value, { hour: 'numeric', minute: '2-digit', hour12: true });
+  const hour = date.getHours();
+  const minute = date.getMinutes().toString().padStart(2, '0');
+  
+  if (locale.value === 'ka') {
+    return `${hour}:${minute}`;
+  } else {
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const displayHour = hour % 12 || 12;
+    return `${displayHour}:${minute} ${ampm}`;
+  }
 });
 
 </script> 

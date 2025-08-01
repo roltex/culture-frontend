@@ -69,52 +69,84 @@
 
     <!-- Main Header -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-20">
+      <div class="flex justify-between items-center h-16">
         <!-- Logo and Brand -->
         <div class="flex items-center">
-          <router-link to="/" class="flex items-center space-x-4">
+          <router-link to="/" class="flex items-center space-x-3">
             <div class="relative">
               <img 
                 src="/logo.png" 
                 alt="Ministry of Culture and Sport" 
-                class="h-12 w-auto"
+                class="h-10 w-auto"
               />
             </div>
           </router-link>
         </div>
 
         <!-- Desktop Navigation -->
-        <nav class="hidden lg:flex items-center space-x-1">
-          <router-link 
-            v-for="item in navigationItems" 
-            :key="item.path"
-            :to="item.path"
-            class="relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary rounded-lg transition-all duration-200 hover:bg-primary-10 group uppercase tracking-wide"
-            active-class="bg-primary-10"
+        <nav class="hidden lg:flex items-center  flex-1 justify-center">
+          <div 
+            v-for="menuItem in rootMenus" 
+            :key="menuItem.id"
+            class="relative group"
           >
-            {{ t(item.label) }}
-            <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-primary transition-all duration-200 group-hover:w-3/4"></span>
-          </router-link>
+            <!-- Main Menu Item -->
+            <component
+              :is="getMenuComponent(menuItem)"
+              :to="getMenuUrl(menuItem)"
+              :href="getMenuUrl(menuItem)"
+              :target="menuItem.target"
+              class="relative px-2 py-2 text-sm font-medium text-[#25324B] hover:text-primary rounded-lg transition-all duration-200 hover:bg-primary-10 group flex items-center space-x-1"
+              :class="{
+                'bg-[#f5f6f8] rounded-xl': isActiveMenu(menuItem),
+              }"
+            >
+              <span class="whitespace-nowrap">{{ getLocalizedLabel(menuItem) }}</span>
+              <!-- Dropdown Arrow for items with children -->
+              <svg 
+                v-if="menuItem.children && menuItem.children.length > 0"
+                class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180 flex-shrink-0" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+              <span v-if="isActiveMenu(menuItem)" class="absolute left-4 right-4 -bottom-1 h-0.5 bg-[#1a2c47] rounded-full"></span>
+              <span v-else class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-primary transition-all duration-200 group-hover:w-3/4"></span>
+            </component>
+
+            <!-- Dropdown Submenu -->
+            <div 
+              v-if="menuItem.children && menuItem.children.length > 0"
+              class="absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-left scale-95 group-hover:scale-100 z-50"
+            >
+              <div class="py-2">
+                <component
+                  v-for="subItem in menuItem.children"
+                  :key="subItem.id"
+                  :is="getMenuComponent(subItem)"
+                  :to="getMenuUrl(subItem)"
+                  :href="getMenuUrl(subItem)"
+                  :target="subItem.target"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:text-primary hover:bg-primary-10 transition-colors duration-200"
+                  :class="{ 'bg-primary text-white': isActiveMenu(subItem) }"
+                >
+                  {{ getLocalizedLabel(subItem) }}
+                </component>
+              </div>
+            </div>
+          </div>
         </nav>
 
         <!-- Right side actions -->
         <div class="flex items-center space-x-4">
-          <!-- Search Button -->
-          <button
-            @click="toggleSearch"
-            class="hidden md:flex items-center justify-center p-2 rounded-lg text-gray-700 hover:text-primary hover:bg-gray-100 transition-colors duration-200"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </button>
-
           <!-- Contact Button -->
           <router-link
-            to="/contact"
-            class="hidden md:inline-flex items-center px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-dark transition-colors duration-200"
+            to="/kontaqti"
+            class="hidden md:inline-flex items-center px-3 py-1.5 bg-primary text-white text-xs font-medium rounded-lg hover:bg-primary-dark transition-colors duration-200"
           >
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
             {{ t('message.contact') }}
@@ -133,55 +165,40 @@
         </div>
       </div>
 
-      <!-- Search Bar (Hidden by default) -->
-      <div v-if="searchOpen" class="pb-4">
-        <div class="relative">
-          <input
-            v-model="searchQuery"
-            type="text"
-            :placeholder="t('header.searchPlaceholder')"
-            class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-            @keyup.enter="performSearch"
-          />
-          <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
-          <button
-            @click="toggleSearch"
-            class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-      </div>
-
       <!-- Mobile Navigation -->
       <div v-if="mobileMenuOpen" class="lg:hidden">
         <div class="px-2 pt-2 pb-3 space-y-1 border-t border-gray-200">
-          <router-link
-            v-for="item in navigationItems"
-            :key="item.path"
-            :to="item.path"
-            @click="mobileMenuOpen = false"
-            class="text-gray-700 hover:text-primary hover:bg-primary/10 block px-3 py-2 rounded-lg text-base font-medium transition-colors duration-200 uppercase tracking-wide"
-            active-class="bg-primary text-white"
-          >
-            {{ t(item.label) }}
-          </router-link>
-          
-          <!-- Mobile Contact Button -->
-          <router-link
-            to="/contact"
-            @click="mobileMenuOpen = false"
-            class="mt-4 inline-flex items-center px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-dark transition-colors duration-200"
-          >
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-            </svg>
-            {{ t('message.contact') }}
-          </router-link>
+          <div v-for="menuItem in rootMenus" :key="menuItem.id">
+            <!-- Mobile Main Menu Item -->
+            <component
+              :is="getMenuComponent(menuItem)"
+              :to="getMenuUrl(menuItem)"
+              :href="getMenuUrl(menuItem)"
+              :target="menuItem.target"
+              @click="mobileMenuOpen = false"
+              class="text-gray-700 hover:text-primary hover:bg-primary/10 block px-3 py-2 rounded-lg text-base font-medium transition-colors duration-200"
+              :class="{ 'bg-primary text-white': isActiveMenu(menuItem) }"
+            >
+              {{ getLocalizedLabel(menuItem) }}
+            </component>
+            
+            <!-- Mobile Submenu -->
+            <div v-if="menuItem.children && menuItem.children.length > 0" class="ml-4 mt-1 space-y-1">
+              <component
+                v-for="subItem in menuItem.children"
+                :key="subItem.id"
+                :is="getMenuComponent(subItem)"
+                :to="getMenuUrl(subItem)"
+                :href="getMenuUrl(subItem)"
+                :target="subItem.target"
+                @click="mobileMenuOpen = false"
+                class="text-gray-600 hover:text-primary hover:bg-primary/10 block px-3 py-2 rounded-lg text-sm transition-colors duration-200"
+                :class="{ 'bg-primary text-white': isActiveMenu(subItem) }"
+              >
+                {{ getLocalizedLabel(subItem) }}
+              </component>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -192,13 +209,15 @@
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useSettings } from '@/composables/useSettings'
+import { useMenus, type MenuItem } from '@/composables/useMenus'
+import { useRoute } from 'vue-router'
 
 const { t, locale } = useI18n()
 const { getContactInfo, getSocialMedia } = useSettings()
+const { rootMenus } = useMenus()
+const route = useRoute()
 
 const mobileMenuOpen = ref(false)
-const searchOpen = ref(false)
-const searchQuery = ref('')
 
 // Get dynamic settings
 const contactInfoQuery = getContactInfo()
@@ -209,15 +228,70 @@ const socialMedia = computed(() => socialMediaQuery.data.value)
 
 const currentLocale = computed(() => locale.value)
 
-const navigationItems = [
-  { path: '/', label: 'message.home' },
-  { path: '/news', label: 'message.news' },
-  { path: '/projects', label: 'message.projects' },
-  { path: '/competitions', label: 'message.competitions' },
-  { path: '/vacancies', label: 'message.vacancies' },
-  { path: '/legislation', label: 'message.legislation' },
-  { path: '/institutions', label: 'message.institutions' }
-]
+// Helper functions for menu handling
+const getLocalizedLabel = (menuItem: MenuItem) => {
+  const locale = currentLocale.value as 'ka' | 'en'
+  
+  // Check if the label object exists and has the current locale
+  if (menuItem.label && menuItem.label[locale]) {
+    return menuItem.label[locale]
+  }
+  
+  // Fallback to Georgian first, then English
+  if (menuItem.label && menuItem.label.ka) {
+    return menuItem.label.ka
+  }
+  
+  if (menuItem.label && menuItem.label.en) {
+    return menuItem.label.en
+  }
+  
+  // Final fallback - return a string representation of the label
+  return typeof menuItem.label === 'string' ? menuItem.label : 'Menu Item'
+}
+
+const getMenuComponent = (menuItem: MenuItem) => {
+  if (menuItem.type === 'external' || menuItem.target === '_blank') {
+    return 'a'
+  }
+  return 'router-link'
+}
+
+const getMenuUrl = (menuItem: MenuItem) => {
+  if (menuItem.type === 'external') {
+    return menuItem.url
+  }
+  if (menuItem.type === 'page' && menuItem.page_slug) {
+    // For page type, route to the pages API route
+    return `/${menuItem.page_slug}`
+  }
+  // For link type or other types, use the url directly
+  return menuItem.url || '/'
+}
+
+const isActiveMenu = (menuItem: MenuItem) => {
+  const currentPath = route.path
+  const menuPath = getMenuUrl(menuItem)
+  
+  // Handle home page
+  if (menuPath === '/') {
+    return currentPath === '/'
+  }
+  
+  // Handle exact matches first
+  if (currentPath === menuPath) {
+    return true
+  }
+  
+  // Handle page type items - check if current path matches the page slug
+  if (menuItem.type === 'page' && menuItem.page_slug) {
+    // Check if current path matches the pages route
+    return currentPath === `/pages/${menuItem.page_slug}` || currentPath.startsWith(`/pages/${menuItem.page_slug}/`)
+  }
+  
+  // For other types, check if current path starts with menu path
+  return currentPath.startsWith(menuPath)
+}
 
 const toggleLanguage = () => {
   const newLocale = currentLocale.value === 'ka' ? 'en' : 'ka'
@@ -227,31 +301,5 @@ const toggleLanguage = () => {
 
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value
-  if (mobileMenuOpen.value) {
-    searchOpen.value = false
-  }
-}
-
-const toggleSearch = () => {
-  searchOpen.value = !searchOpen.value
-  if (searchOpen.value) {
-    mobileMenuOpen.value = false
-    // Focus the search input after a short delay
-    setTimeout(() => {
-      const searchInput = document.querySelector('input[type="text"]') as HTMLInputElement
-      if (searchInput) {
-        searchInput.focus()
-      }
-    }, 100)
-  }
-}
-
-const performSearch = () => {
-  if (searchQuery.value.trim()) {
-    // You can implement search functionality here
-    console.log('Searching for:', searchQuery.value)
-    searchQuery.value = ''
-    searchOpen.value = false
-  }
 }
 </script> 

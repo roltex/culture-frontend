@@ -30,19 +30,19 @@
           <h4 class="text-xl font-bold text-white mb-6">{{ t('footer.quickLinks') }}</h4>
           <ul class="space-y-3">
             <li>
-              <router-link to="/news" class="text-slate-300 hover:text-blue-400 transition-colors duration-200 font-medium flex items-center group">
+              <router-link to="/siakhleebi" class="text-slate-300 hover:text-blue-400 transition-colors duration-200 font-medium flex items-center group">
                 <span class="w-2 h-2 bg-blue-400 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                 {{ t('message.news') }}
               </router-link>
             </li>
             <li>
-              <router-link to="/projects" class="text-slate-300 hover:text-blue-400 transition-colors duration-200 font-medium flex items-center group">
+              <router-link to="/proeqtebi" class="text-slate-300 hover:text-blue-400 transition-colors duration-200 font-medium flex items-center group">
                 <span class="w-2 h-2 bg-blue-400 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                 {{ t('message.projects') }}
               </router-link>
             </li>
             <li>
-              <router-link to="/competitions" class="text-slate-300 hover:text-blue-400 transition-colors duration-200 font-medium flex items-center group">
+              <router-link to="/konkursebi" class="text-slate-300 hover:text-blue-400 transition-colors duration-200 font-medium flex items-center group">
                 <span class="w-2 h-2 bg-blue-400 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                 {{ t('message.competitions') }}
               </router-link>
@@ -60,9 +60,15 @@
               </router-link>
             </li>
             <li>
-              <router-link to="/institutions" class="text-slate-300 hover:text-blue-400 transition-colors duration-200 font-medium flex items-center group">
+              <router-link to="/ssipebi" class="text-slate-300 hover:text-blue-400 transition-colors duration-200 font-medium flex items-center group">
                 <span class="w-2 h-2 bg-blue-400 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                 {{ t('message.institutions') }}
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/moatagleebi" class="text-slate-300 hover:text-blue-400 transition-colors duration-200 font-medium flex items-center group">
+                <span class="w-2 h-2 bg-blue-400 rounded-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                {{ t('deputyMinisters.title') }}
               </router-link>
             </li>
           </ul>

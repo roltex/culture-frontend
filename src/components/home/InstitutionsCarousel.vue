@@ -1,16 +1,11 @@
 <template>
-  <div class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-20 sm:py-24 overflow-hidden">
+  <div class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 py-12 sm:py-16 overflow-hidden">
     <!-- Centered Title -->
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="relative text-center mb-16">
-        <h2 class="text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl">
           {{ $t('home.institutions.carousel_title') }}
         </h2>
-        <div class="absolute -top-8 left-1/2 -translate-x-1/2 z-0">
-          <span class="text-7xl lg:text-8xl font-black text-slate-200/80 uppercase" style="letter-spacing: 0.1em;">
-            {{ $t('home.institutions.background_text') }}
-          </span>
-        </div>
         <div class="w-16 h-1 bg-primary mt-4 mx-auto"></div>
       </div>
     </div>
@@ -20,10 +15,10 @@
       <div v-if="isLoading" class="!px-12 md:!px-20 !py-4">
         <div class="flex space-x-6 overflow-hidden">
           <!-- Skeleton Cards -->
-          <div v-for="n in 6" :key="n" class="!w-[260px] md:!w-[300px] flex-shrink-0">
-            <div class="flex flex-col h-52 bg-slate-50 rounded-2xl p-6 animate-pulse">
-              <div class="flex-grow flex items-center justify-center h-28">
-                <div class="w-16 h-16 bg-gray-200 rounded-lg"></div>
+          <div v-for="n in 6" :key="n" class="!w-[200px] md:!w-[220px] flex-shrink-0">
+            <div class="flex flex-col h-40 bg-slate-50 rounded-2xl p-4 animate-pulse">
+              <div class="flex-grow flex items-center justify-center h-20">
+                <div class="w-12 h-12 bg-gray-200 rounded-lg"></div>
               </div>
               <div class="mt-4">
                 <div class="h-4 bg-gray-200 rounded w-3/4 mx-auto"></div>
@@ -56,15 +51,15 @@
         <swiper-slide
           v-for="institution in institutions"
           :key="institution.id"
-          class="!w-[260px] md:!w-[300px] group"
+          class="!w-[200px] md:!w-[220px] group"
         >
           <a
             :href="institution.website_url || undefined"
             target="_blank"
             rel="noopener noreferrer"
-            class="flex flex-col h-52 bg-slate-50 rounded-2xl p-6 transition-all duration-300 ease-in-out hover:bg-white hover:shadow-2xl hover:-translate-y-2 text-center"
+            class="flex flex-col h-40 bg-slate-50 rounded-2xl p-4 transition-all duration-300 ease-in-out hover:bg-white hover:shadow-2xl hover:-translate-y-2 text-center"
           >
-            <div class="flex-grow flex items-center justify-center h-28">
+            <div class="flex-grow flex items-center justify-center h-20">
               <img
                 v-if="institution.logo"
                 class="max-h-full max-w-full object-contain filter grayscale transition-all duration-300 ease-in-out group-hover:grayscale-0"

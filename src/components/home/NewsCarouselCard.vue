@@ -2,9 +2,9 @@
   <article class="flex flex-col h-full bg-white rounded-lg transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1">
     <!-- Image -->
     <div class="relative overflow-hidden rounded-t-lg">
-      <router-link :to="`/news/${news.slug}`" class="block h-64 bg-slate-100">
+      <router-link :to="`/siakhleebi/${news.slug}`" class="block h-64 bg-slate-100">
         <img
-          :src="news.featured_image || '/placeholder-news.jpg'"
+          :src="getImageUrl(news.featured_image) || '/placeholder-news.jpg'"
           :alt="localizedTitle"
           class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
         />
@@ -25,7 +25,7 @@
         <!-- Text Content -->
         <div class="flex-grow">
           <h3 class="text-lg font-bold text-slate-800 mb-2 line-clamp-2 leading-tight">
-            <router-link :to="`/news/${news.slug}`" class="hover:text-primary-dark transition-colors">
+            <router-link :to="`/siakhleebi/${news.slug}`" class="hover:text-primary-dark transition-colors">
               {{ localizedTitle }}
             </router-link>
           </h3>
@@ -39,7 +39,7 @@
       </div>
       
       <!-- Excerpt -->
-      <p class="text-sm text-slate-600 mt-4 line-clamp-3 leading-relaxed flex-grow">
+      <p class="text-sm text-gray-600 mt-4 line-clamp-3 leading-relaxed flex-grow">
         {{ localizedExcerpt }}
       </p>
     </div>
@@ -51,6 +51,7 @@ import { useI18n } from 'vue-i18n'
 import { computed } from 'vue'
 import type { News } from '@/composables/useNews'
 import { getLocalizedContent } from '@/composables/useNews'
+import { getImageUrl } from '@/utils/getImageUrl'
 
 interface Props {
   news: News

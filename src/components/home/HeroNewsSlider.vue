@@ -26,16 +26,16 @@
         <swiper-slide v-for="news in featuredNews" :key="news.id">
           <div class="flex w-full h-full flex-col-reverse md:flex-row">
             <!-- Image Section -->
-            <div class="relative w-full h-1/2 md:w-7/12 md:h-full">
+            <div class="relative w-full h-1/2 md:w-2/5 md:h-full">
               <img 
-                :src="news.featured_image || undefined" 
+                :src="getImageUrl(news.featured_image) || undefined" 
                 :alt="getLocalizedContent(news.title, locale)"
                 class="w-full h-full object-cover"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-50 md:bg-gradient-to-l md:from-slate-50"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/30 via-transparent to-transparent md:bg-gradient-to-l md:from-slate-50 md:via-slate-50/30 md:via-transparent md:to-transparent"></div>
             </div>
             <!-- Text Section -->
-            <div class="w-full h-1/2 bg-slate-50 flex flex-col justify-center items-center text-center md:w-5/12 md:h-full md:items-start md:text-left p-8 lg:p-16 z-10">
+            <div class="w-full h-1/2 bg-slate-50 flex flex-col justify-center items-center text-center md:w-3/5 md:h-full md:items-start md:text-left p-8 lg:p-16 z-10">
               <h2 class="text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight mb-4 text-slate-800">
                 {{ getLocalizedContent(news.title, locale) }}
               </h2>
@@ -68,12 +68,12 @@
         <!-- Hero Skeleton -->
         <div class="flex w-full h-full flex-col-reverse md:flex-row">
           <!-- Image Section Skeleton -->
-          <div class="relative w-full h-1/2 md:w-7/12 md:h-full">
+          <div class="relative w-full h-1/2 md:w-2/5 md:h-full">
             <div class="w-full h-full bg-gray-200 animate-pulse"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-50 md:bg-gradient-to-l md:from-slate-50"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/30 via-transparent to-transparent md:bg-gradient-to-l md:from-slate-50 md:via-slate-50/30 md:via-transparent md:to-transparent"></div>
           </div>
           <!-- Text Section Skeleton -->
-          <div class="w-full h-1/2 bg-slate-50 flex flex-col justify-center items-center text-center md:w-5/12 md:h-full md:items-start md:text-left p-8 lg:p-16 z-10">
+          <div class="w-full h-1/2 bg-slate-50 flex flex-col justify-center items-center text-center md:w-3/5 md:h-full md:items-start md:text-left p-8 lg:p-16 z-10">
             <div class="space-y-4 w-full">
               <!-- Title skeleton -->
               <div class="h-8 bg-gray-200 rounded animate-pulse"></div>
@@ -116,6 +116,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { useNews, getLocalizedContent } from '@/composables/useNews'
+import { getImageUrl } from '@/utils/getImageUrl'
 
 const { t, locale } = useI18n()
 const { getLatestNews } = useNews()

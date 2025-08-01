@@ -2,34 +2,35 @@
   <div class="bg-gray-50 min-h-screen">
     <!-- Loading State -->
     <div v-if="isLoading" class="bg-gray-50 min-h-screen">
-      <!-- Hero Section Skeleton -->
-      <div class="relative bg-gray-800 py-32 px-6 sm:py-40 sm:px-12 lg:px-16">
-        <div class="absolute inset-0 bg-gray-700"></div>
-        <div class="relative max-w-5xl mx-auto text-center">
-          <!-- Title skeleton -->
-          <div class="space-y-4">
-            <div class="h-12 bg-gray-600 rounded mx-auto max-w-4xl animate-pulse"></div>
-            <div class="h-12 bg-gray-600 rounded mx-auto max-w-3xl animate-pulse"></div>
-            <div class="h-12 bg-gray-600 rounded mx-auto max-w-2xl animate-pulse"></div>
-          </div>
-          
-          <!-- Meta skeleton -->
-          <div class="mt-6 flex items-center justify-center space-x-4">
-            <div class="h-6 bg-gray-600 rounded w-32 animate-pulse"></div>
-            <div class="text-gray-500">&bull;</div>
-            <div class="h-6 bg-gray-600 rounded w-24 animate-pulse"></div>
+      <!-- Compact Header Section Skeleton -->
+      <div class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div class="max-w-4xl">
+            <!-- Title skeleton -->
+            <div class="h-8 bg-gray-200 rounded w-3/4 mb-2 animate-pulse"></div>
+            <!-- Meta skeleton -->
+            <div class="flex items-center space-x-4">
+              <div class="h-4 bg-gray-200 rounded w-24 animate-pulse"></div>
+              <div class="h-4 bg-gray-200 rounded w-20 animate-pulse"></div>
+              <div class="h-4 bg-gray-200 rounded w-16 animate-pulse"></div>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Main Content Area Skeleton -->
-      <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-12">
+      <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-6">
           
           <!-- Article Content Skeleton -->
           <article class="lg:col-span-8 bg-white rounded-lg shadow-sm overflow-hidden p-6 md:p-8">
+            <!-- Image Carousel Skeleton -->
+            <div class="mb-8 pb-6 border-b border-gray-200">
+              <div class="h-64 bg-gray-200 rounded-lg animate-pulse"></div>
+            </div>
+            
+            <!-- Content paragraphs skeleton -->
             <div class="space-y-6">
-              <!-- Content paragraphs -->
               <div class="space-y-4">
                 <div class="h-4 bg-gray-200 rounded animate-pulse"></div>
                 <div class="h-4 bg-gray-200 rounded w-5/6 animate-pulse"></div>
@@ -46,17 +47,11 @@
                 <div class="h-4 bg-gray-200 rounded animate-pulse"></div>
                 <div class="h-4 bg-gray-200 rounded w-4/6 animate-pulse"></div>
                 <div class="h-4 bg-gray-200 rounded w-5/6 animate-pulse"></div>
-              </div>
-              
-              <div class="space-y-4">
-                <div class="h-4 bg-gray-200 rounded animate-pulse"></div>
-                <div class="h-4 bg-gray-200 rounded w-3/4 animate-pulse"></div>
-                <div class="h-4 bg-gray-200 rounded w-4/6 animate-pulse"></div>
               </div>
             </div>
             
             <!-- Social Share Skeleton -->
-            <div class="mt-10 pt-6 border-t border-gray-200">
+            <div class="mt-8 pt-6 border-t border-gray-200">
               <div class="h-6 bg-gray-200 rounded w-24 mb-3 animate-pulse"></div>
               <div class="flex items-center space-x-4">
                 <div class="w-6 h-6 bg-gray-200 rounded animate-pulse"></div>
@@ -95,7 +90,7 @@
         <p class="mt-2 text-gray-600">{{ error?.message }}</p>
         <div class="mt-8">
           <router-link
-            to="/news"
+            to="/siakhleebi"
             class="inline-flex items-center px-6 py-3 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
           >
             {{ t('news.backToNews') }}
@@ -106,40 +101,47 @@
 
     <!-- Article Page Layout -->
     <div v-else-if="article">
-      <!-- Hero Section -->
-      <div class="relative bg-gray-800 py-32 px-6 sm:py-40 sm:px-12 lg:px-16">
-        <div class="absolute inset-0 overflow-hidden">
-          <img :src="article.featured_image || '/placeholder-news.jpg'" :alt="localizedTitle" class="w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent"></div>
-        </div>
-        <div class="relative max-w-5xl mx-auto text-center">
-          <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
-            {{ localizedTitle }}
-          </h1>
-          <div class="mt-6 text-lg text-gray-300 flex items-center justify-center space-x-4">
-            <span>{{ formattedDate }}</span>
-            <span class="text-gray-500">&bull;</span>
-             <div class="flex items-center space-x-1">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+      <!-- Compact Header Section -->
+      <div class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div class="max-w-4xl">
+            <h1 class="text-xl md:text-2xl font-semibold text-gray-900 leading-tight mb-2">
+              {{ localizedTitle }}
+            </h1>
+            <div class="flex items-center space-x-4 text-xs text-gray-500">
+              <div class="flex items-center space-x-1">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <span>{{ article.views_count }} {{ t('news.views') }}</span>
+                <span>{{ formattedDate }}</span>
               </div>
+
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Main Content Area -->
-      <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-12">
+      <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 lg:gap-6">
           
           <!-- Article Content -->
           <article class="lg:col-span-8 bg-white rounded-lg shadow-sm overflow-hidden p-6 md:p-8">
+            <!-- Image Carousel -->
+            <div v-if="carouselImages.length > 0" class="mb-8 pb-6 border-b border-gray-200">
+              <ImageCarousel 
+                :images="carouselImages" 
+                :title="localizedTitle"
+              />
+            </div>
+            
             <div class="prose prose-lg max-w-none" v-html="localizedContent"></div>
             
+            <!-- Attachments -->
+            <AttachmentViewer :attachments="article.attachments" />
+            
             <!-- Social Share -->
-            <div class="mt-10 pt-6 border-t border-gray-200">
+            <div class="mt-8 pt-6 border-t border-gray-200">
               <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ t('news.share') }}</h3>
               <div class="flex items-center space-x-4">
                 <button @click="shareOnFacebook" title="Share on Facebook" class="text-gray-400 hover:text-blue-600 transition-colors">
@@ -161,8 +163,8 @@
               <h3 class="text-xl font-semibold text-gray-900 px-6 pt-6 pb-4">{{ t('news.otherNews') }}</h3>
               <ul v-if="relatedNews.length" class="divide-y divide-gray-200">
                 <li v-for="related in relatedNews" :key="related.id" class="group">
-                  <router-link :to="`/news/${related.slug}`" class="flex items-start space-x-4 p-6 hover:bg-gray-50 transition-colors">
-                    <img :src="related.featured_image || '/placeholder-news.jpg'" :alt="getLocalizedContent(related.title, locale)" class="w-20 h-20 rounded-lg object-cover flex-shrink-0">
+                  <router-link :to="`/siakhleebi/${related.slug}`" class="flex items-start space-x-4 p-6 hover:bg-gray-50 transition-colors">
+                    <img :src="getImageUrl(related.featured_image) || '/placeholder-news.jpg'" :alt="getLocalizedContent(related.title, locale)" class="w-20 h-20 rounded-lg object-cover flex-shrink-0">
                     <div class="flex-1">
                       <p class="font-semibold text-gray-800 group-hover:text-blue-600 transition-colors line-clamp-2">
                         {{ getLocalizedContent(related.title, locale) }}
@@ -188,6 +190,10 @@ import { computed, ref, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useNews, getLocalizedContent, type News } from '@/composables/useNews'
+import { getImageUrl } from '@/utils/getImageUrl'
+import { formatSelectedDate } from '@/utils/dateUtils'
+import ImageCarousel from '@/components/common/ImageCarousel.vue'
+import AttachmentViewer from '@/components/common/AttachmentViewer.vue'
 
 const { t, locale } = useI18n()
 const route = useRoute()
@@ -213,6 +219,23 @@ console.log('Article data:', article.value)
 const { data: allNews } = getLatestNews()
 const relatedNews = ref<News[]>([])
 
+// Carousel images for the component
+const carouselImages = computed(() => {
+  const images = []
+  if (article.value?.featured_image) {
+    const featuredUrl = getImageUrl(article.value.featured_image)
+    console.log('Featured image URL:', featuredUrl)
+    images.push(featuredUrl)
+  }
+  if (article.value?.gallery) {
+    const galleryUrls = article.value.gallery.map(img => getImageUrl(img))
+    console.log('Gallery image URLs:', galleryUrls)
+    images.push(...galleryUrls)
+  }
+  console.log('All carousel images:', images)
+  return images
+})
+
 const shareUrl = computed(() => window.location.href)
 const shareTitle = computed(() => localizedTitle.value)
 
@@ -237,45 +260,32 @@ watchEffect(() => {
 const localizedTitle = computed(() => article.value ? getLocalizedContent(article.value.title, locale.value) : '')
 const localizedContent = computed(() => article.value ? getLocalizedContent(article.value.content, locale.value) : '')
 
-const formatDate = (dateString: string) => {
-  const date = new Date(dateString)
-  const day = date.getDate()
-  const monthIndex = date.getMonth()
-  const year = date.getFullYear()
-
-  const monthKeys = [
-    'dates.months.january', 'dates.months.february', 'dates.months.march',
-    'dates.months.april', 'dates.months.may', 'dates.months.june',
-    'dates.months.july', 'dates.months.august', 'dates.months.september',
-    'dates.months.october', 'dates.months.november', 'dates.months.december'
-  ]
-
-  const monthName = t(monthKeys[monthIndex])
-
-  if (locale.value === 'ka') {
-    return `${day} ${monthName}, ${year}`
-  }
-  
-  return `${monthName} ${day}, ${year}`
-}
-
 const formattedDate = computed(() => {
   if (!article.value) return ''
-  return formatDate(article.value.published_at)
+  const date = new Date(article.value.published_at);
+  const day = date.getDate();
+  const year = date.getFullYear();
+  const monthIndex = date.getMonth();
+  const weekdayIndex = date.getDay();
+  
+  const monthNames = {
+    'ka': ['იანვარი', 'თებერვალი', 'მარტი', 'აპრილი', 'მაისი', 'ივნისი', 'ივლისი', 'აგვისტო', 'სექტემბერი', 'ოქტომბერი', 'ნოემბერი', 'დეკემბერი'],
+    'en': ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  };
+  
+  const weekdayNames = {
+    'ka': ['კვირა', 'ორშაბათი', 'სამშაბათი', 'ოთხშაბათი', 'ხუთშაბათი', 'პარასკევი', 'შაბათი'],
+    'en': ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  };
+  
+  const month = monthNames[locale.value as keyof typeof monthNames]?.[monthIndex] || monthNames.en[monthIndex];
+  const weekday = weekdayNames[locale.value as keyof typeof weekdayNames]?.[weekdayIndex] || weekdayNames.en[weekdayIndex];
+  
+  if (locale.value === 'ka') {
+    return `${weekday}, ${day} ${month}, ${year}`;
+  } else {
+    return `${weekday}, ${month} ${day}, ${year}`;
+  }
 })
 </script>
 
-<style>
-.prose {
-  color: #374151;
-}
-.prose h1, .prose h2, .prose h3 {
-  color: #111827;
-}
-.prose a {
-  color: #2563eb;
-}
-.prose strong {
-  color: #111827;
-}
-</style> 

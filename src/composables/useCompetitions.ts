@@ -28,6 +28,7 @@ export interface Competition {
   contact_email?: string
   contact_phone?: string
   application_deadline: string
+  application_form?: string
   is_active: boolean
   is_published: boolean
   published_at: string

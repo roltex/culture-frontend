@@ -4,15 +4,10 @@
       <div class="grid grid-cols-1 lg:grid-cols-3">
         <!-- Header and Navigation -->
         <div class="lg:col-span-1 relative flex flex-col justify-center pb-10">
-          <div class="relative">
-            <h2 class="text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl relative z-10 whitespace-pre-line">
+          <div>
+            <h2 class="text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl whitespace-pre-line">
               {{ $t('home.latest_news.title') }}
             </h2>
-            <div class="absolute -top-8 -left-4 z-0">
-              <span class="text-7xl lg:text-8xl font-black text-slate-200/80 uppercase" style="letter-spacing: 0.1em;">
-                {{ $t('home.latest_news.background_text') }}
-              </span>
-            </div>
             <div class="w-16 h-1 bg-primary mt-4"></div>
           </div>
           
@@ -28,10 +23,10 @@
               </svg>
             </button>
             <router-link 
-              to="/news" 
+              to="/siakhleebi" 
               class="group inline-flex items-center gap-2 bg-transparent text-primary border-2 border-primary py-3 px-6 rounded-md font-semibold text-base transition-all duration-300 ease-in-out hover:bg-primary hover:text-white hover:-translate-y-px focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-50"
             >
-              <span>{{ $t('home.latest_news.view_all') }}</span>
+              {{ $t('home.latest_news.view_all') }}
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 ease-in-out group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
               </svg>

@@ -1,5 +1,12 @@
 import { useQuery } from '@tanstack/vue-query'
 import api from '@/services/api'
+import { Ref, computed } from 'vue'
+
+export interface ProjectAttachment {
+  url: string
+  name: string
+  size: number
+}
 
 export interface Project {
   id: number
@@ -20,6 +27,8 @@ export interface Project {
   start_date: string
   end_date: string
   featured_image: string | null
+  gallery: string[]
+  attachments: ProjectAttachment[]
   is_featured: boolean
   is_published: boolean
   published_at: string
@@ -67,15 +76,20 @@ export const useProjects = () => {
     })
   }
 
-  const getProjectBySlug = (slug: string) => {
+  const getProjectBySlug = (slug: Ref<string> | string) => {
+    const slugValue = computed(() => {
+      if (typeof slug === 'string') return slug
+      return slug.value
+    })
+
     return useQuery({
-      queryKey: ['projects', slug],
+      queryKey: ['projects', 'slug', slugValue],
       queryFn: async () => {
-        const response = await api.get(`/projects/${slug}`)
+        const response = await api.get(`/projects/${slugValue.value}`)
         // Handle both wrapped and unwrapped responses
         return (response.data.data || response.data) as Project
       },
-      enabled: !!slug
+      enabled: !!slugValue.value
     })
   }
 

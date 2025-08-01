@@ -57,7 +57,7 @@
             class="!overflow-visible"
           >
             <swiper-slide v-for="project in projectsData" :key="project.id" class="!w-[350px] h-auto flex py-4">
-              <router-link :to="`/projects/${project.slug}`" class="block h-full group">
+              <router-link :to="`/proeqtebi/${project.slug}`" class="block h-full group">
                 <article class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1 w-full h-full">
                   <!-- Project Image -->
                   <div class="relative overflow-hidden">
@@ -105,7 +105,7 @@
                     <div class="space-y-2 text-sm text-slate-600">
                       <div class="flex items-center gap-2 flex-row-reverse">
                         <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        <span dir="ltr">{{ formatDate(project.start_date) }} - {{ project.end_date ? formatDate(project.end_date) : t('status.ongoing') }}</span>
+                        <span dir="ltr">{{ formatEventDateLocalized(project.start_date, locale) }} - {{ project.end_date ? formatEventDateLocalized(project.end_date, locale) : t('status.ongoing') }}</span>
                       </div>
                       <div v-if="project.location" class="flex items-center gap-2 flex-row-reverse">
                         <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -138,15 +138,10 @@
         
         <!-- Header and Navigation -->
         <div class="lg:col-span-1 relative flex flex-col justify-center items-start lg:items-end text-right lg:text-right pb-10 pl-4 lg:pl-0">
-          <div class="relative">
-            <h2 class="text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl relative z-10 whitespace-pre-line">
+          <div>
+            <h2 class="text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl whitespace-pre-line">
               {{ t('home.projects.title') }}
             </h2>
-            <div class="absolute -top-8 -right-4 z-0">
-              <span class="text-7xl lg:text-8xl font-black text-slate-200/80 uppercase" style="letter-spacing: 0.1em;">
-                {{ t('home.projects.background_text', 'PROJECTS') }}
-              </span>
-            </div>
             <div class="w-16 h-1 bg-primary mt-4 ml-auto"></div>
           </div>
           
@@ -166,7 +161,7 @@
               </svg>
             </button>
             <router-link 
-              to="/projects" 
+              to="/proeqtebi" 
               class="group inline-flex items-center gap-2 bg-transparent text-primary border-2 border-primary py-3 px-6 rounded-md font-semibold text-base transition-all duration-300 ease-in-out hover:bg-primary hover:text-white hover:-translate-y-px focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-slate-50"
             >
               <span>{{ t('home.projects.view_all') }}</span>
@@ -190,6 +185,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import { useProjects } from '@/composables/useProjects'
 import { getImageUrl } from '@/utils/getImageUrl'
+import { formatEventDate, formatEventDateLocalized } from '@/utils/dateUtils'
 
 const { t, locale } = useI18n()
 const { getFeaturedProjects } = useProjects()
@@ -209,29 +205,7 @@ const getLocalizedContent = (content: { ka: string; en: string } | null | undefi
   return content[currentLocale as keyof typeof content] || content.ka || content.en || ''
 }
 
-// Format date
-const formatDate = (dateString: string) => {
-  if (!dateString) return ''
-  const date = new Date(dateString)
 
-  const day = date.getDate()
-  const year = date.getFullYear()
-
-  const monthIndex = date.getMonth()
-  const monthNames = [
-    'january', 'february', 'march', 'april', 'may', 'june',
-    'july', 'august', 'september', 'october', 'november', 'december'
-  ]
-  const monthKey = `dates.months_short.${monthNames[monthIndex]}`
-  const month = t(monthKey)
-
-  if (locale.value === 'ka') {
-    return `${day} ${month}, ${year}`
-  }
-  
-  const capitalizedMonth = month.charAt(0).toUpperCase() + month.slice(1)
-  return `${capitalizedMonth} ${day}, ${year}`
-}
 
 // Get formatted day for date block
 const getFormattedDay = (dateString: string) => {

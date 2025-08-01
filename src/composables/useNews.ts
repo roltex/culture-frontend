@@ -2,6 +2,12 @@ import { useQuery } from '@tanstack/vue-query'
 import api from '@/services/api'
 import { Ref, computed } from 'vue'
 
+export interface NewsAttachment {
+  url: string
+  name: string
+  size: number
+}
+
 export interface News {
   id: number
   title: {
@@ -18,6 +24,8 @@ export interface News {
   }
   slug: string
   featured_image: string | null
+  gallery: string[]
+  attachments: NewsAttachment[]
   is_published: boolean
   published_at: string
   views_count: number

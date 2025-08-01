@@ -47,16 +47,11 @@
                 <div class="flex flex-col justify-center text-left pl-0 lg:px-[20%] h-auto lg:h-full relative">
                   <!-- Section Title positioned at top -->
                   <div class="absolute top-16 left-[20%] right-0 z-10">
-                    <div class="relative">
-                      <h2 class="text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl relative z-10 whitespace-pre-line">
+                    <div>
+                      <h2 class="text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl whitespace-pre-line">
                         {{ t('home.sections.activeCompetitions') }}
                       </h2>
-                      <div class="absolute -top-8 -left-4 z-0">
-                        <span class="text-7xl lg:text-8xl font-black text-slate-200/80 uppercase" style="letter-spacing: 0.1em;">
-                          {{ t('home.competitions.background_text') }}
-                        </span>
-                      </div>
-                      <div class="w-16 h-1 bg-primary mt-4 relative z-20"></div>
+                      <div class="w-16 h-1 bg-primary mt-4"></div>
                     </div>
                   </div>
                   
