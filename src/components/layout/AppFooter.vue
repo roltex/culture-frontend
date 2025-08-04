@@ -14,7 +14,7 @@
             <div>
               <img 
                 src="/logo_white.png" 
-                alt="Ministry of Culture and Sport" 
+                alt="Ministry of Culture of Georgia" 
                 class="h-12 w-auto"
               />
             </div>

@@ -3,7 +3,7 @@ import { createI18n } from 'vue-i18n'
 const messages = {
   en: {
     message: {
-      hello: 'Ministry of Culture and Sport of Georgia',
+      hello: 'Ministry of Culture of Georgia',
       welcome: 'Welcome to the official website',
       loading: 'Loading...',
       error: 'An error occurred',
@@ -50,7 +50,7 @@ const messages = {
     },
     home: {
       hero: {
-        title: 'Ministry of Culture and Sport of Georgia',
+        title: 'Ministry of Culture of Georgia',
         subtitle: 'Promoting culture, preserving heritage, and developing sports in Georgia',
         cta: 'Learn More'
       },
@@ -96,7 +96,7 @@ const messages = {
         background_text: 'COMPETITIONS'
       },
       institutions: {
-        subtitle: 'Discover the organizations and institutions under the Ministry of Culture and Sport',
+        subtitle: 'Discover the organizations and institutions under the Ministry of Culture of Georgia',
         carousel_title: 'Our Subordinate Institutions',
         background_text: 'LEPL'
       },
@@ -106,7 +106,7 @@ const messages = {
     },
     institutions: {
       title: 'Subordinate Institutions',
-      subtitle: 'Discover the organizations and institutions under the Ministry of Culture and Sport',
+      subtitle: 'Discover the organizations and institutions under the Ministry of Culture of Georgia',
       about: 'About',
       mission: 'Mission',
       vision: 'Vision',
@@ -132,7 +132,7 @@ const messages = {
       }
     },
     footer: {
-      description: 'The Ministry of Culture and Sport of Georgia is committed to promoting cultural development, preserving national heritage, and fostering sports excellence throughout the country.',
+      description: 'The Ministry of Culture of Georgia is committed to promoting cultural development, preserving national heritage, and fostering sports excellence throughout the country.',
       quickLinks: 'Quick Links',
       followUs: 'Follow Us',
       socialDescription: 'Stay connected with us on social media for the latest updates and announcements.',
@@ -180,7 +180,7 @@ const messages = {
     },
     news: {
       subtitle: 'Stay updated with the latest news and announcements from the ministry',
-      description: 'Stay informed with the latest news, announcements, and updates from the Ministry of Culture and Sport of Georgia',
+      description: 'Stay informed with the latest news, announcements, and updates from the Ministry of Culture of Georgia',
       noNewsDescription: 'No news articles are currently available. Please check back later.',
       backToNews: 'Back to News',
       views: 'views',
@@ -191,7 +191,7 @@ const messages = {
     },
     deputyMinisters: {
       title: 'Deputy Ministers',
-      subtitle: 'Meet the deputy ministers of the Ministry of Culture and Sport of Georgia',
+      subtitle: 'Meet the deputy ministers of the Ministry of Culture of Georgia',
       deputyMinister: 'Deputy Minister',
       about: 'About',
       socialMedia: 'Social Media',
